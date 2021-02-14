@@ -1,19 +1,3 @@
-import os
-from flask import Flask, request, jsonify, render_template
-from flask_sqlalchemy import SQLAlchemy
-from flask_restful import Api, Resource
-from flask_marshmallow import Marshmallow
-
-app = Flask(__name__)
-
-app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
-api = Api(app)
-
-##DE AQUI PA ABAJO TODO ES DEL SCHEMA DE RESTAURANTE-------
-
 from models.restaurant import Restaurant
 from models.restaurant import post_schema
 from models.restaurant import posts_schema
@@ -92,4 +76,3 @@ class ResourceRestaurantId(Resource):
 api.add_resource(ResourceRestaurant, '/restaurant')      
 api.add_resource(ResourceOneRestaurant, '/restaurant/<int:id_>')
 api.add_resource(ResourceRestaurantId, '/get_all_restaurant/<int:id_>')
-

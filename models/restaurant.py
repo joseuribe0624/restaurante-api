@@ -1,4 +1,6 @@
 from app import db
+from app import ma
+
 
 class Restaurant(db.Model):
     __tablename__ = "restaurant"
@@ -10,18 +12,16 @@ class Restaurant(db.Model):
     place = db.Column(db.String(50)) 
     address = db.Column(db.String(50)) 
     phone = db.Column(db.String(50)) 
-    image_logo = db.Column(db.String(200))
-    image_menu = db.Column(db.String(200))
     delivery = db.Column(db.Boolean)
 
-    def __init__(self, name, category, place, address, phone, image_logo, image_menu, delivery):
+    def __init__(self, name, category, place, address, phone, delivery):
         self.name = name 
         self.category = category
         self.place = place
         self.address = address 
         self.phone = phone
-        self.image_logo = image_logo
-        self.image_menu = image_menu
+        #self.image_logo = image_logo
+        #self.image_menu = image_menu
         self.delivery = delivery
 
     def __repr__(self):
@@ -35,10 +35,18 @@ class Restaurant(db.Model):
             'place':self.place,
             'address':self.address,
             'phone':self.phone,
-            'image_logo':self.image_logo,
-            'image_menu':self.image_menu,
             'delivery':self.delivery
         }
+
+class Restaurant_Schema(ma.Schema):
+    class Meta:
+        fields = ("id", "name", "category", "place", "address", "phone", "delivery")
+
+   
+
+post_schema = Restaurant_Schema()
+
+posts_schema = Restaurant_Schema(many = True)
 
 
 # (las cuatro posibles categorías son: Gourmet,Comida Rápida, Comida Típica o de Autor)
