@@ -1,4 +1,4 @@
 # restaurante-api
 
-Carlos Mera
+Carlos Mera,
 Jose David 
